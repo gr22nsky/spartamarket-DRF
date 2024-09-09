@@ -13,6 +13,7 @@ def validate_signup(signup_data):
     first_name = signup_data.get('first_name')
     last_name = signup_data.get('last_name')
     email = signup_data.get('email')
+    gender = signup_data.get('gender')
 
     err_msg_list = []
     #username_validate
@@ -24,13 +25,13 @@ def validate_signup(signup_data):
         err_msg_list.append('password가 일치하지않습니다.')
 
     #email_validate
-    try:
-        validate_email(email)
-    except:
-        err_msg_list.append('email형식이 맞지 않습니다.')
-
-    if User.objects.filter(email=email).exists():
-        err_msg_list.append('중복된 email이 있습니다.')
+    if email:
+        try:
+            validate_email(email)
+        except:
+            err_msg_list.append('email형식이 맞지 않습니다.')
+        if User.objects.filter(email=email).exists():
+            err_msg_list.append('중복된 email이 있습니다.')
     
     if err_msg_list:
         return False, err_msg_list

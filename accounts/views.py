@@ -32,6 +32,10 @@ class SignUpView(APIView):
         res_data['refresh_token'] = str(refresh)
         return Response(res_data)
     
+    def delete(self, using=None, keep_parents=None):
+        self.soft_delte()
+        return Response({'회원탈퇴가 완료되었습니다.'})
+    
 class LogInView(APIView):
     def post(self, request):
         username = request.data.get('username')
@@ -66,3 +70,16 @@ class ProfileView(APIView):
         user = User.objects.get(username=username)
         serializer = UserSerializer(user)
         return Response(serializer.data)
+    
+    def put(self, request, username):
+        user = User.objects.get(username=username)
+        if username == request.user.username:
+            is_valid, err_msg = validate_signup(request.data)
+            if not is_valid:
+                return Response({'message':err_msg}, status = 400)
+            
+            serializer = UserSerializer(user, data=request.data, partial=True)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+        return Response({'수정권한이 없습니다.'})
