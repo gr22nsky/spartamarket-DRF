@@ -12,7 +12,7 @@ class SignUpView(APIView):
     def post(self, request):
         is_valid, err_msg = validate_signup(request.data)
         if not is_valid:
-            return Response({'error' : err_msg}, status = 400)
+            return Response({err_msg}, status = 400)
         
         user = User.objects.create_user(
             username = request.data.get('username'),
@@ -39,7 +39,7 @@ class LogInView(APIView):
         user = authenticate(username=username, password=password)
 
         if not user:
-            return Response({'error':'username 또는 password가 올바르지 않습니다.'})
+            return Response({'username 또는 password가 올바르지 않습니다.'})
 
         serializer = UserSerializer(user)
         res_data = {'username' : serializer.data.get('username')}
@@ -55,10 +55,10 @@ class LogOutView(APIView):
         try:
             refresh_token = RefreshToken(refresh_token_str)
         except TokenError as e:
-            return Response({'message': str(e)}, status=400)
+            return Response({str(e)}, status=400)
 
         refresh_token.blacklist()
-        return Response({'message':'로그아웃되었습니다.'}, status=200)
+        return Response({'로그아웃되었습니다.'}, status=200)
 
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
