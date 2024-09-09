@@ -44,13 +44,13 @@ class ProductDetailView(APIView):
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data)
-        return Response({'수정권한이 없습니다.'})
+        return Response({'message':'수정권한이 없습니다.'})
     
     def delete(self, request, pk):
         product = self.get_object(request, pk)
         if product.author == request.user:
             product.delete()
             message = {'글이 삭제되었습니다.'}
-            return Response(message)
-        return Response({'삭제권한이 없습니다.'})
+            return Response({'message':message})
+        return Response({'message':'삭제권한이 없습니다.'})
         

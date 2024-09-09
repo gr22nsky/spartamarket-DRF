@@ -12,7 +12,7 @@ class SignUpView(APIView):
     def post(self, request):
         is_valid, err_msg = validate_signup(request.data)
         if not is_valid:
-            return Response({err_msg}, status = 400)
+            return Response({'message':err_msg}, status = 400)
         
         user = User.objects.create_user(
             username = request.data.get('username'),
@@ -34,7 +34,7 @@ class SignUpView(APIView):
     
     def delete(self, using=None, keep_parents=None):
         self.soft_delte()
-        return Response({'회원탈퇴가 완료되었습니다.'})
+        return Response({'message':'회원탈퇴가 완료되었습니다.'})
     
 class LogInView(APIView):
     def post(self, request):
@@ -43,7 +43,7 @@ class LogInView(APIView):
         user = authenticate(username=username, password=password)
 
         if not user:
-            return Response({'username 또는 password가 올바르지 않습니다.'})
+            return Response({'message':'username 또는 password가 올바르지 않습니다.'})
 
         serializer = UserSerializer(user)
         res_data = {'username' : serializer.data.get('username')}
@@ -62,7 +62,7 @@ class LogOutView(APIView):
             return Response({str(e)}, status=400)
 
         refresh_token.blacklist()
-        return Response({'로그아웃되었습니다.'}, status=200)
+        return Response({'message':'로그아웃되었습니다.'}, status=200)
 
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
@@ -82,4 +82,4 @@ class ProfileView(APIView):
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data)
-        return Response({'수정권한이 없습니다.'})
+        return Response({'message':'수정권한이 없습니다.'})
