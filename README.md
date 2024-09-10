@@ -1,34 +1,39 @@
 # Spartamarket-DRF-Project
 백엔드 역할 수행 + Django REST Framework를 이용한 RESTful API
-
-
-
-
+<br>
+<br>
+<br>
+<br>
 ## Introduction of project
 각 유저가 자신의 물건을 등록하고 탐색할 수 있는 웹사이트의 백엔드 부분을 Django REST Framework를 사용해
 구현하고 Postman으로 관리
-
-
-
-
+<br>
+<br>
+<br>
+<br>
 ## Period of project
 - 24.09.05 ~ 24.09.09
-
-
-
+<br>
+<br>
+<br>
+<br>
 
 ## Enviroment of development
 - Visual Studio Code
 - Django 4.2
 - Djangorestframework 3.15.2
 - Postman
-
-
-
+<br>
+<br>
+<br>
+<br>
 
 ## ERDiagram
 
 <img width="694" alt="ERD" src="https://github.com/user-attachments/assets/211ac1a4-f3dc-41cd-8a58-b824de348d4d">
+<br>
+<br>
+<br>
 
 ## 주요기능
 - - **회원가입**
