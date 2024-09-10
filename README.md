@@ -108,8 +108,52 @@
     401
     <img width="961" alt="상품삭제2" src="https://github.com/user-attachments/assets/569406ca-957d-44cb-b1df-fbd540faa783">
 
+## 추가기능
+- - **로그아웃**
+    - **Endpoint**: **`/api/accounts/logout`**
+    - **Method**: **`POST`**
+    - **조건**: 로그인 상태 필요.
+    - **구현**: 토큰 무효화로 로그아웃 처리 가능.
+
+    200
+    <img width="958" alt="로그아웃1" src="https://github.com/user-attachments/assets/09b4ece8-1ca7-4c19-a173-21d2a7124324">
+    
+    400
+    <img width="952" alt="로그아웃2" src="https://github.com/user-attachments/assets/d31684df-37c3-4aec-9ddd-0106fa40e545">
+
+- - **본인 정보 수정**
+    - **Endpoint**: **`/api/accounts/<str:username>`**
+    - **Method**: **`PUT`**
+    - **조건**: 이메일, 이름, 닉네임, 생일 입력 필요하며, 성별, 자기소개 생략 가능
+    - **검증**: 로그인 한 사용자만 본인 프로필 수정 가능. 수정된 이메일은 기존 다른 사용자의 이메일과 username은 중복되면 안 됨.
+    - **구현**: 입력된 정보를 검증 후 데이터베이스를 업데이트.
+   
+    200
+    <img width="954" alt="회원정보수정1" src="https://github.com/user-attachments/assets/dfc97040-1045-40ae-9a00-6fa6492dc7ea">
+
+    401
+    <img width="955" alt="회원정보수정2" src="https://github.com/user-attachments/assets/b938d912-64cc-425a-a51f-308044d86730">
+
+
+- - **회원 탈퇴**
+    - **Endpoint**: **`/api/accounts`**
+    - **Method**: **`DELETE`**
+    - **조건**: 로그인 상태, 비밀번호 재입력 필요.
+    - **검증**: 입력된 비밀번호가 기존 비밀번호와 일치해야 함.
+    - **구현**: 비밀번호 확인 후 계정 삭제.
+
+    200
+    <img width="956" alt="회원탈퇴1" src="https://github.com/user-attachments/assets/94f294e4-40fb-4381-9ce1-a3ddff6cc880">
+    
+    400
+    <img width="960" alt="회원탈퇴2" src="https://github.com/user-attachments/assets/03b7d082-3d74-46c4-a679-b8344b13dd48">
+
+    401
+    <img width="958" alt="회원탈퇴3" src="https://github.com/user-attachments/assets/09def37b-161e-4570-a1a9-774566df1b8e">
 
 
 
 
     
+    
+
